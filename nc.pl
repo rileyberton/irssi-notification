@@ -105,6 +105,13 @@ sub sig_message_topic {
 	);
 }
 
+sub sig_window_changed($$) {
+	my ($new, $old) = @_;
+	if (defined $old) {
+		$old->print("----------------------------------- read prior");
+	}
+}
+
 sub nc_notify {
 	my (%args) = @_;
 	
@@ -130,5 +137,6 @@ Irssi::signal_add_last('print text',        'sig_print_text');
 Irssi::signal_add_last('notifylist joined', 'sig_notify_joined');
 Irssi::signal_add_last('notifylist left',   'sig_notify_left');
 Irssi::signal_add_last('message topic',     'sig_message_topic');
+Irssi::signal_add_last('window changed',    'sig_window_changed');
 
 Irssi::print('%G>>%n '.$IRSSI{name}.' '.$VERSION.' loaded (/nc-help for help. /nc-test to test.)');
